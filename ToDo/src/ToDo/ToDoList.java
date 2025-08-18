@@ -3,8 +3,6 @@ package ToDo;
 import ToDo.Task.Task;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A ToDo list for modifying different tasks.
@@ -49,6 +47,11 @@ public class ToDoList implements ListModifier<Task>
     /**
      * {@inheritDoc}
      */
+    public String getTitle () {return this.title;}
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ArrayList<Task> getList() throws NullPointerException
     {
@@ -63,8 +66,9 @@ public class ToDoList implements ListModifier<Task>
      * {@inheritDoc}
      */
     @Override
-    public void add(Task task)
+    public void add(Task... tasks)
     {
+        for (Task task : tasks)
         this.ToDO.add(task); // adds a ToDo.ToDo.Task.Task
     }
 
@@ -76,11 +80,8 @@ public class ToDoList implements ListModifier<Task>
     {
         if (!this.ToDO.remove(task))
         {
-            throw new NoSuchElementException("ToDo.ToDo.Task.Task not in To Do List!");
+            throw new NoSuchElementException("Task not in To Do List!");
         }
-
-        Logger logger = Logger.getLogger(ToDoList.class.getName());
-        logger.log(Level.INFO, "ToDo.ToDo.Task.Task successfully removed!");
     }
 
     /**

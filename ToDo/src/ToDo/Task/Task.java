@@ -37,7 +37,8 @@ public class Task //implements TaskExecutable
      * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      */
 
-    public Task (String task, Optional<LocalDate> startDate, Optional<LocalDate> endDate, Optional<String[]> description)
+    //public Task (String task, Optional<LocalDate> startDate, Optional<LocalDate> endDate, Optional<String[]> description)
+    public Task (String task)
     {
         this.title = task;
 
@@ -132,4 +133,5 @@ public class Task //implements TaskExecutable
     {
         return important;
     }
+
 }

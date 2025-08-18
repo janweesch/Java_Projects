@@ -23,6 +23,13 @@ public interface ListModifier <T>
     void setTitle(String title); // set List Title
 
     /**
+     * Gets the Title of the ToDo.ToDoList.
+     *
+     * @return Title of the ToDo.ToDoList
+     */
+    String getTitle();
+
+    /**
      * Gets the ToDo.ToDoList.
      *
      * @throws NullPointerException if ToDo.ToDoList is not available
@@ -34,7 +41,7 @@ public interface ListModifier <T>
      * Adds a ToDo.ToDo.Task.Task to the ToDo.ToDoList.
      * @param task ToDo.ToDo.Task.Task to add to the ToDo.ToDoList.
      */
-    void add (T task); // add ToDo.ToDo.Task.Task
+    void add (T... task); // add ToDo.ToDo.Task.Task
 
     /**
      * Removes a ToDo.ToDo.Task.Task from ToDo.ToDoList.
