@@ -47,7 +47,6 @@ public class Main
         // Show the result
         //toDoList1.getList().stream().forEach(Task -> System.out.println(Task.getTitle()));
 
-        toDoList1 = null;
         System.out.println(toDoList1.getTitle());
 
 
