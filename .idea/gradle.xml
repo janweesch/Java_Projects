@@ -14,7 +14,7 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/PyDGUI" />
-        <option name="gradleJvm" value="21" />
+        <option name="gradleJvm" value="temurin-21" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/PyGUI" />
