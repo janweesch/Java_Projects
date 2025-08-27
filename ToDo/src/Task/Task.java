@@ -1,10 +1,9 @@
-package ToDo.Task;
+package Task;
 
-import ToDo.UsefulMethods.TimeMethods;
+import UsefulMethods.TimeMethods;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Optional;
 
 
 public class Task //implements TaskExecutable

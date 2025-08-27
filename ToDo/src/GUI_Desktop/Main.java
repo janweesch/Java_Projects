@@ -1,10 +1,7 @@
-package ToDo.GUI_Desktop;
+package GUI_Desktop;
 
-import ToDo.Task.Task;
-import ToDo.ToDoList;
-
-import java.util.Optional;
-import java.util.stream.Stream;
+import Task.Task;
+import Lists.ToDoList;
 
 public class Main
 {

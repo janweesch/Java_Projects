@@ -1,4 +1,4 @@
-package ToDo;
+package Lists;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -17,36 +17,36 @@ public interface ListModifier <T>
     ArrayList<T> createList(); // create List
 
     /**
-     * Sets the Title of the ToDo.ToDoList.
-     * @param title The Title of the ToDo.ToDoList
+     * Sets the Title of the ToDo.Lists.ToDoList.
+     * @param title The Title of the ToDo.Lists.ToDoList
      */
     void setTitle(String title); // set List Title
 
     /**
-     * Gets the Title of the ToDo.ToDoList.
+     * Gets the Title of the ToDo.Lists.ToDoList.
      *
-     * @return Title of the ToDo.ToDoList
+     * @return Title of the ToDo.Lists.ToDoList
      */
     String getTitle();
 
     /**
-     * Gets the ToDo.ToDoList.
+     * Gets the ToDo.Lists.ToDoList.
      *
-     * @throws NullPointerException if ToDo.ToDoList is not available
-     * @return Returns the ToDo.ToDoList.
+     * @throws NullPointerException if ToDo.Lists.ToDoList is not available
+     * @return Returns the ToDo.Lists.ToDoList.
      */
     ArrayList<T> getList() throws NullPointerException; // get List
 
     /**
-     * Adds a ToDo.ToDo.Task.Task to the ToDo.ToDoList.
-     * @param task ToDo.ToDo.Task.Task to add to the ToDo.ToDoList.
+     * Adds a ToDo.ToDo.Task.Task to the ToDo.Lists.ToDoList.
+     * @param task ToDo.ToDo.Task.Task to add to the ToDo.Lists.ToDoList.
      */
     void add (T... task); // add ToDo.ToDo.Task.Task
 
     /**
-     * Removes a ToDo.ToDo.Task.Task from ToDo.ToDoList.
-     * @param task ToDo.ToDo.Task.Task to remove from ToDo.ToDoList.
-     * @throws NoSuchElementException if the task is not in ToDo.ToDoList
+     * Removes a ToDo.ToDo.Task.Task from ToDo.Lists.ToDoList.
+     * @param task ToDo.ToDo.Task.Task to remove from ToDo.Lists.ToDoList.
+     * @throws NoSuchElementException if the task is not in ToDo.Lists.ToDoList
      */
     void remove (T task) throws NoSuchElementException; // remove ToDo.ToDo.Task.Task
 
@@ -55,13 +55,13 @@ public interface ListModifier <T>
      * @param task1 One ToDo.ToDo.Task.Task to swap
      * @param task2 Second ToDo.ToDo.Task.Task to swap with first ToDo.ToDo.Task.Task
      * @throws NullPointerException if one of the tasks is null
-     * @throws NoSuchElementException if one of the tasks is not in ToDo.ToDoList
+     * @throws NoSuchElementException if one of the tasks is not in ToDo.Lists.ToDoList
      */
     void swap (T task1, T task2) throws NullPointerException, NoSuchElementException; // swap to Tasks
 
     /**
-     * Deletes first all Tasks from the List, then the ToDo.ToDoList.
-     * @throws NullPointerException if ToDo.ToDoList is not available
+     * Deletes first all Tasks from the List, then the ToDo.Lists.ToDoList.
+     * @throws NullPointerException if ToDo.Lists.ToDoList is not available
      */
     void deleteList() throws NullPointerException; // delete List
 }

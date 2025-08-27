@@ -1,6 +1,6 @@
-package ToDo;
+package Lists;
 
-import ToDo.Task.Task;
+import Task.Task;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -16,9 +16,9 @@ public class ToDoList implements ListModifier<Task>
     private ArrayList<Task> ToDO; // TODo List
 
     /**
-     * Creates a new ToDo.ToDoList and assigns it a specific Title.
+     * Creates a new ToDo.Lists.ToDoList and assigns it a specific Title.
      *
-     * @param title Title of the ToDo.ToDoList.
+     * @param title Title of the ToDo.Lists.ToDoList.
      */
     public ToDoList(String title)
     {
