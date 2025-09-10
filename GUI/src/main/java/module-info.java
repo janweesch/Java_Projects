@@ -1,4 +1,4 @@
-module com.example.gui
+module pyd.desktop
 {
     requires javafx.controls;
     requires javafx.fxml;
@@ -6,9 +6,7 @@ module com.example.gui
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
 
-    // ToDoList-Module
-    requires ToDo;
+    opens pyd.desktop.gui to javafx.fxml;
+    exports pyd.desktop.gui;
 
-    opens com.example.gui to javafx.fxml;
-    exports com.example.gui;
 }

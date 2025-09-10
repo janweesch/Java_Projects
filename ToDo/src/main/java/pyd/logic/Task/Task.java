@@ -1,6 +1,6 @@
-package pyd.Task;
+package pyd.logic.Task;
 
-import pyd.UsefulMethods.TimeMethods;
+import pyd.logic.UsefulMethods.TimeMethods;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

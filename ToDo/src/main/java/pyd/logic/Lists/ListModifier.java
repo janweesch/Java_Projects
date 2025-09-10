@@ -1,4 +1,4 @@
-package pyd.Lists;
+package pyd.logic.Lists;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;

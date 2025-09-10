@@ -1,7 +1,7 @@
-package pyd.desktop.cli;
+package pyd.logic.desktop.cli;
 
-import pyd.Task.Task;
-import pyd.Lists.ToDoList;
+import pyd.logic.Task.Task;
+import pyd.logic.Lists.ToDoList;
 
 public class Main
 {

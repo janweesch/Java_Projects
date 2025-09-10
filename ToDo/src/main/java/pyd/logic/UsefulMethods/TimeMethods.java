@@ -1,4 +1,4 @@
-package pyd.UsefulMethods;
+package pyd.logic.UsefulMethods;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

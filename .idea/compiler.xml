@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="GUI" target="21" />
+      <module name="GUI.main" target="21" />
+      <module name="GUI.test" target="21" />
+      <module name="pyd.ToDO" target="21" />
+      <module name="pyd.ToDo.jo" target="21" />
+      <module name="pyd.ToDO.main" target="21" />
+      <module name="pyd.ToDO.test" target="21" />
+      <module name="ToDo" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,6 +1,6 @@
-package pyd.Lists;
+package pyd.logic.Lists;
 
-import pyd.Task.Task;
+import pyd.logic.Task.Task;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 

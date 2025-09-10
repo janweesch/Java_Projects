@@ -1,4 +1,4 @@
-package com.desktop.gui;
+package pyd.desktop.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

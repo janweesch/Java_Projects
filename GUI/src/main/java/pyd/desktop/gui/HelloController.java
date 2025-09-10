@@ -1,4 +1,4 @@
-package com.desktop.gui;
+package pyd.desktop.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
