@@ -1,6 +1,6 @@
-package Lists;
+package pyd.Lists;
 
-import Task.Task;
+import pyd.Task.Task;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -99,12 +99,12 @@ public class ToDoList implements ListModifier<Task>
 
         if (temp_1_index == -1)
         {
-            throw new NoSuchElementException("Task "+ task1 +" not in To Do list");
+            throw new NoSuchElementException("com/Task " + task1 +" not in To Do list");
         }
 
         if (temp_2_index == -1)
         {
-            throw new NoSuchElementException("Task "+ task2 +" not in To Do list");
+            throw new NoSuchElementException("com/Task " + task2 +" not in To Do list");
         }
 
         this.ToDO.set(temp_2_index, task1); // insert Task1 at position of Task2

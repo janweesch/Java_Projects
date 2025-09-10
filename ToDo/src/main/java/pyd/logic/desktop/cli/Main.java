@@ -1,7 +1,7 @@
-package GUI_Desktop;
+package pyd.desktop.cli;
 
-import Task.Task;
-import Lists.ToDoList;
+import pyd.Task.Task;
+import pyd.Lists.ToDoList;
 
 public class Main
 {
