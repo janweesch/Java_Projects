@@ -9,29 +9,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/GUI" />
-            <option value="$PROJECT_DIR$/ToDo" />
+            <option value="$PROJECT_DIR$/desktop" />
+            <option value="$PROJECT_DIR$/logic" />
           </set>
         </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/GUI" />
-        <option name="gradleJvm" value="21" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/GUI" />
-            <option value="$PROJECT_DIR$/ToDo" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/PyDGUI" />
-        <option name="gradleJvm" value="temurin-21" />
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/PyGUI" />
-        <option name="gradleJvm" value="24" />
       </GradleProjectSettings>
     </option>
   </component>

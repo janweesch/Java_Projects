@@ -1,4 +1,6 @@
 rootProject.name = 'pyd'
-include 'ToDo'
-include 'GUI'
+include 'logic'
+include 'desktop'
+
+
 
