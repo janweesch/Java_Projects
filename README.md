@@ -12,4 +12,8 @@
 - [ ] Implement Tests for ToDoList and GUI
 - [ ] Expand Task Class with complex (with TimeMethods, Notes and Documents)
 
+## Helpful Websites
+https://jenkov.com/tutorials/javafx/textfield.html
+https://javabeginners.de/Frameworks/JavaFX/Layout/JavaFX_mit_Stylesheets.php
+https://fxdocs.github.io/docs/html5/#_stackpane
 
