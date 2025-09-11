@@ -4,6 +4,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -29,6 +39,25 @@ public class ToDoList extends Application
         stage.setScene(scene);
         stage.show();
     }
+
+//    public void start(Stage primaryStage) throws Exception {
+//        primaryStage.setTitle("HBox Experiment 1");
+//
+//        TextField textField = new TextField();
+//
+//        Button button = new Button("Click to get text");
+//
+//        button.setOnAction(action -> {
+//            System.out.println(textField.getText());
+//        });
+//
+//        HBox hbox = new HBox(textField, button);
+//
+//        Scene scene = new Scene(hbox, 200, 100);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+//
+//    }
 
 
 
