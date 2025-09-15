@@ -133,4 +133,9 @@ public class Task //implements TaskExecutable
         return important;
     }
 
+    public String toString()
+    {
+        return title;
+    }
+
 }
