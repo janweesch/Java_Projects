@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="GUI-1.0-SNAPSHOT">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/desktop/build/distributions/GUI-1.0-SNAPSHOT.zip!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
