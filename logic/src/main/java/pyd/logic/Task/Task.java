@@ -1,5 +1,7 @@
 package pyd.logic.Task;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import pyd.logic.UsefulMethods.TimeMethods;
 
 import java.time.LocalDate;
@@ -14,7 +16,8 @@ public class Task //implements TaskExecutable
 
     private LocalDate endDate; // end of the task
 
-    private boolean done; // describes if task is done
+//    private boolean done; // describes if task is done
+    private BooleanProperty done; // describes if task is done
 
     private String[] description; // description of the task
 
@@ -85,10 +88,10 @@ public class Task //implements TaskExecutable
 
     public void setDone (boolean status)
     {
-        this.done = status;
+        this.done.set(status);
     }
 
-    public boolean getDone ()
+    public BooleanProperty getDone ()
     {
         return this.done;
     }

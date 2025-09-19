@@ -7,6 +7,7 @@ module pyd.desktop
     requires org.kordamp.bootstrapfx.core;
 
     requires pyd.logic;
+    requires java.desktop;
 
     opens pyd.desktop.gui to javafx.fxml;
     exports pyd.desktop.gui;
