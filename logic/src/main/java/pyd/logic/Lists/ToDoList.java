@@ -1,8 +1,11 @@
 package pyd.logic.Lists;
 
+import javafx.collections.ObservableList;
 import pyd.logic.Task.Task;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
+import javafx.collections.FXCollections;
 
 /**
  * A ToDo list for modifying different tasks.
@@ -13,7 +16,7 @@ public class ToDoList implements ListModifier<Task>
 {
     private String title; // Title of the ToDO List
 
-    private ArrayList<Task> ToDO; // TODo List
+    private ObservableList<Task> ToDO; // TODo List
 
     /**
      * Creates a new ToDo.Lists.ToDoList and assigns it a specific Title.
@@ -26,13 +29,19 @@ public class ToDoList implements ListModifier<Task>
         this.ToDO = createList();
     }
 
+    public ToDoList ()
+    {
+        this.ToDO = createList();
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public ArrayList<Task> createList()
+    public ObservableList<Task> createList()
     {
-        return new ArrayList<>(); // creates new empty ArrayList
+        //return new ArrayList<>(); // creates new empty ArrayList
+        return FXCollections.observableArrayList();
     }
 
     /**
@@ -53,7 +62,7 @@ public class ToDoList implements ListModifier<Task>
      * {@inheritDoc}
      */
     @Override
-    public ArrayList<Task> getList() throws NullPointerException
+    public ObservableList<Task> getList() throws NullPointerException
     {
         if (this.ToDO == null)
         {
@@ -68,8 +77,8 @@ public class ToDoList implements ListModifier<Task>
     @Override
     public void add(Task... tasks)
     {
-        for (Task task : tasks)
-        this.ToDO.add(task); // adds a ToDo.ToDo.Task.Task
+        // adds a ToDo.ToDo.Task.Task
+        this.ToDO.addAll(Arrays.asList(tasks));
     }
 
     /**

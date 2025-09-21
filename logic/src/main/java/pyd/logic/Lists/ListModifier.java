@@ -1,5 +1,7 @@
 package pyd.logic.Lists;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -14,7 +16,8 @@ public interface ListModifier <T>
      *
      * @return List of Type ToDo.ToDo.Task.Task
      */
-    ArrayList<T> createList(); // create List
+
+    ObservableList<T> createList(); // create List
 
     /**
      * Sets the Title of the ToDo.Lists.ToDoList.
@@ -35,7 +38,8 @@ public interface ListModifier <T>
      * @throws NullPointerException if ToDo.Lists.ToDoList is not available
      * @return Returns the ToDo.Lists.ToDoList.
      */
-    ArrayList<T> getList() throws NullPointerException; // get List
+
+    ObservableList<T> getList() throws NullPointerException; // get List
 
     /**
      * Adds a ToDo.ToDo.Task.Task to the ToDo.Lists.ToDoList.
