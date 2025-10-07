@@ -73,10 +73,10 @@ public class ToDoListController implements Initializable
         if (list.getSelectionModel().getSelectedItems().isEmpty())
         {
             Label delete_Label = new Label("Select the Tasks you want to delete!");
-            Scene scene2 = new Scene(delete_Label, 200, 200);
-            Stage stage2 = new Stage();
-            stage2.setScene(scene2);
-            stage2.show();
+            Scene scene2 = new Scene(delete_Label, 600, 600);
+            Stage stage = new Stage();
+            stage.setScene(scene2);
+            stage.show();
             //this.task.setPromptText("Select the Tasks you want to delete!");
         }
         else
@@ -95,7 +95,6 @@ public class ToDoListController implements Initializable
         toDoList = new ToDoList();
         list.setItems(toDoList.getList());
         list.setCellFactory(CheckBoxListCell.forListView(Task::getDone));
-        list.setEditable(true);
         list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 }
