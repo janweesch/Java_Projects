@@ -8,22 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-
-
 import java.io.IOException;
 
 
 public class ToDoList extends Application
 
-
 {
-
     @Override
     public void start(Stage stage) throws IOException
     {
@@ -41,3 +31,4 @@ public class ToDoList extends Application
         launch();
     }
 } // ToDoList
+

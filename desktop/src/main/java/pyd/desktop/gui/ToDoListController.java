@@ -1,30 +1,23 @@
 package pyd.desktop.gui;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.scene.layout.VBox;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 // ToDoList import
-import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.control.cell.TextFieldListCell;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
+
+import javafx.stage.Stage;
 import pyd.logic.Lists.ToDoList;
 import pyd.logic.Task.Task;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 public class ToDoListController implements Initializable
@@ -34,7 +27,10 @@ public class ToDoListController implements Initializable
     @FXML
     private TextField title;
     @FXML
+    private TextField task;
+    @FXML
     private ListView<Task> list;
+
 
     // ToDoList
     ToDoList toDoList;
@@ -43,46 +39,54 @@ public class ToDoListController implements Initializable
     @FXML
     protected void setTitle()
     {
-        //toDoList = new ToDoList(title.getText());
         toDoList.setTitle(title.getText());
-    }
-
-
-    @FXML
-    protected void sort()
-    {
-
-    }
-
-    @FXML
-    protected void sortTasks()
-    {
-
     }
 
     @FXML
     protected void addTask()
     {
-         // Text field
-        TextField textField = new TextField(); // create Text field
-        textField.setPromptText("Put your Task here...");
-        vbox.getChildren().add(2, textField); // show Text field
-        textField.requestFocus(); // request Focus
-        textField.setOnAction(e ->
+        if (task.getText().isEmpty())
         {
-            Task task = new Task(textField.getText()); // create new Task
-            toDoList.add(task); // add -> toDoList
-            textField.clear(); // clear Text Field
-            vbox.getChildren().remove(2);
-        }); // Action Handler
-
+            // set a promptText for explanation
+            this.task.setPromptText("Put your Task you want to add here!");
+        }
+        else
+        {
+            // get Task title and add it to toDoList
+            Task task = new Task(this.task.getText());
+            toDoList.add(task);
+            this.task.clear();
+        }
     } // addTask
+
+    @FXML
+    protected void setTask()
+    {
+        // create new Task
+        Task task = new Task(this.task.getText());
+        toDoList.add(task);
+        this.task.clear();
+    }
 
     public void deleteTask()
     {
-
-
-
+        if (list.getSelectionModel().getSelectedItems().isEmpty())
+        {
+            Label delete_Label = new Label("Select the Tasks you want to delete!");
+            Scene scene2 = new Scene(delete_Label, 200, 200);
+            Stage stage2 = new Stage();
+            stage2.setScene(scene2);
+            stage2.show();
+            //this.task.setPromptText("Select the Tasks you want to delete!");
+        }
+        else
+        {
+            ArrayList<Task> tasks_to_delete =  new ArrayList<>(list.getSelectionModel().getSelectedItems()); // safe Items as Array List
+            for(Task del_task : tasks_to_delete ) // iterate and delete
+            {
+                toDoList.remove(del_task);
+            }
+        }
     }
 
     @Override
@@ -91,5 +95,7 @@ public class ToDoListController implements Initializable
         toDoList = new ToDoList();
         list.setItems(toDoList.getList());
         list.setCellFactory(CheckBoxListCell.forListView(Task::getDone));
+        list.setEditable(true);
+        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 }

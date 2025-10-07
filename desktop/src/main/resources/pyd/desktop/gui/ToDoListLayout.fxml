@@ -13,14 +13,17 @@
 <VBox fx:id="vbox" spacing="30.0" xmlns:fx="http://javafx.com/fxml" fx:controller="pyd.desktop.gui.ToDoListController" >
 
   <TextField fx:id="title" prefHeight="20.0" prefWidth="50.0" promptText="Put your Title..." styleClass="radiusInput" onAction="#setTitle"/>
+
   <HBox spacing="20.0">
-    <Button text="Sort" prefWidth="50" prefHeight="20" onAction="#sortTasks" />
     <Button text="Add" prefWidth="50" prefHeight="20" onAction="#addTask" />
     <Button text="Delete" prefWidth="70" prefHeight="20" onAction="#deleteTask"/>
     <padding>
       <Insets left="180.0" right="10.0"/>
     </padding>
   </HBox>
+
+  <TextField fx:id="task" prefHeight="20.0" prefWidth="50.0" promptText="Put your Task here..." styleClass="radiusInput" onAction="#setTask"/>
+
   <ListView fx:id="list"/>
     <padding>
       <Insets left="10.0" right="10.0"/>
