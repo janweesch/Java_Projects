@@ -21,7 +21,7 @@
 
   <TextField fx:id="task" prefHeight="20.0" prefWidth="50.0" promptText="Put your Task here..." styleClass="radiusInput" onAction="#setTask"/>
 
-  <ListView fx:id="list" maxHeight="Infinity" maxWidth="Infinity"/>
+  <ListView fx:id="list" VBox.vgrow="ALWAYS"/>
     <padding>
       <Insets left="10.0" right="10.0"/>
     </padding>

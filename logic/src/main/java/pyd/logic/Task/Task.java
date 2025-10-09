@@ -1,14 +1,14 @@
 package pyd.logic.Task;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.property.SimpleBooleanProperty;
 import pyd.logic.UsefulMethods.TimeMethods;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class Task //implements TaskExecutable
+public class Task
 {
     private String title; // title of to do list
 
@@ -16,8 +16,7 @@ public class Task //implements TaskExecutable
 
     private LocalDate endDate; // end of the task
 
-//    private boolean done; // describes if task is done
-    private BooleanProperty done; // describes if task is done
+    private BooleanProperty done = new SimpleBooleanProperty(false);
 
     private String[] description; // description of the task
 
@@ -39,21 +38,10 @@ public class Task //implements TaskExecutable
      * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      */
 
-    //public Task (String task, Optional<LocalDate> startDate, Optional<LocalDate> endDate, Optional<String[]> description)
     public Task (String task)
     {
-        this.title = task;
+        title = task;
 
-//        if (startDate.isPresent()) this.startDate = TimeMethods.setDate(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth());
-//        else this.startDate = null;
-//
-//        if (endDate.isPresent()) this.endDate = TimeMethods.setDate(endDate.get().getYear(), endDate.get().getMonthValue(), endDate.get().getDayOfMonth());
-//        else this.endDate = null;
-//
-//        this.done = false; // task is not done yet    
-//
-//        if (description.isPresent()) this.description = description.get();
-//        else this.description = null;
     }
 
     public void setTitle(String title)

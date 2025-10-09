@@ -16,7 +16,7 @@ public class ToDoList extends Application
         FXMLLoader fxmlLoader = new FXMLLoader(ToDoList.class.getResource("ToDoListLayout.fxml"));
         stage.setTitle("Plan Your Day!"); // window name
 
-        Scene scene = new Scene(fxmlLoader.load(), 3440, 1440);
+        Scene scene = new Scene(fxmlLoader.load(), 3000, 1000);
 
         stage.setScene(scene);
         stage.show();
