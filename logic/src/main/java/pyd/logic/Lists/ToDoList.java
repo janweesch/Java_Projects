@@ -1,11 +1,20 @@
 package pyd.logic.Lists;
 
+import jakarta.json.*;
+import jakarta.json.stream.JsonGenerator;
 import javafx.collections.ObservableList;
 import pyd.logic.Task.Task;
-import java.util.ArrayList;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import javafx.collections.FXCollections;
+
+
+
 
 /**
  * A ToDo list for modifying different tasks.
@@ -133,5 +142,35 @@ public class ToDoList implements ListModifier<Task>
         }
         this.ToDO.clear(); // removes all Objects from the List
         this.ToDO = null; // deletes the List
+    }
+
+    /**
+    * JSON-File
+    */
+
+    public void WriteJson() throws IOException
+    {
+        FileWriter fileWriter = new FileWriter(this.title + ".json"); // create FileWriter and specify file name
+
+        // activate PRETTY PRINTING
+        Map<String, Boolean> properties = new HashMap<>(1);
+        properties.put(JsonGenerator.PRETTY_PRINTING, false);
+
+        JsonWriterFactory jf = Json.createWriterFactory(properties);
+        JsonWriter jsonObjectWriter =jf.createWriter(fileWriter); // create writer for json Object
+
+        JsonObjectBuilder jsonObjectBUilder = Json.createObjectBuilder().add("title", this.title); // Create json ObjectBuilder and add ToDo List title
+        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder(); // Create json ArrayBuilder
+        for (Task task : ToDO) // iterate over ToDO List
+        {
+            JsonObject jsonObject1 = Json.createObjectBuilder().add("task", task.getTitle()).add("status", task.getDone().get()).build(); // add tasks
+            jsonArrayBuilder.add(jsonObject1);
+        }
+
+        // write to JSON File
+        jsonObjectBUilder.add("Tasks", jsonArrayBuilder);
+        jsonObjectWriter.writeObject(jsonObjectBUilder.build());
+        jsonObjectWriter.close();
+
     }
 }

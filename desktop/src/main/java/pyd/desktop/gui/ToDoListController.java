@@ -1,27 +1,32 @@
 package pyd.desktop.gui;
 
+import jakarta.json.*;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.VBox;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-// ToDoList import
-
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import pyd.logic.Lists.ToDoList;
 import pyd.logic.Task.Task;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class ToDoListController implements Initializable {
@@ -37,8 +42,6 @@ public class ToDoListController implements Initializable {
 
     // ToDoList
     ToDoList toDoList;
-    private static final String HIGHLIGHTED_CONTROL_INNER_BACKGROUND = "derive(palegreen, 50%)";
-
 
     @FXML
     protected void setTitle() {
@@ -83,6 +86,48 @@ public class ToDoListController implements Initializable {
         }
     }
 
+    @FXML
+    protected void loadToDoList() throws IOException {
+
+        FileChooser fileChooser = new FileChooser(); // open Explorer
+        fileChooser.setTitle("Open ToDO List File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+        File selectedFile =fileChooser.showOpenDialog(list.getScene().getWindow());
+
+        String content = Files.readString(selectedFile.toPath());
+        JsonReader reader = Json.createReader(new StringReader(content));
+        JsonObject obj = reader.readObject();
+        title.setText(obj.getString("title"));
+        List<String> TaskList =  obj.getJsonArray("Tasks").stream().map(JsonValue::asJsonObject).map(o -> o.getString("task")).toList();
+        List<Boolean> StatusList =  obj.getJsonArray("Tasks").stream().map(JsonValue::asJsonObject).map(o -> o.getBoolean("status")).toList();
+
+        int index = 0;
+
+        for (Object task : TaskList)
+        {
+            Task task1 = new Task(task.toString());
+            task1.setDone(StatusList.get(index));
+            toDoList.add(task1);
+
+            index++;
+        }
+        reader.close();
+    }
+
+    @FXML
+    protected void newToDoList()
+    {
+
+    }
+
+    @FXML
+    public void saveToDoList()
+    {
+
+
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -110,6 +155,14 @@ public class ToDoListController implements Initializable {
             }
         );
         list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     }
 
+    public void shutdown() throws IOException
+    {
+        this.toDoList.WriteJson();
+    }
+
+
 }
+

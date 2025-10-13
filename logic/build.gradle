@@ -14,8 +14,13 @@ repositories {
 dependencies {
     implementation('org.controlsfx:controlsfx:11.2.1')
 
+    implementation ('jakarta.json:jakarta.json-api:2.1.1')
+    implementation ('org.glassfish:jakarta.json:2.0.1')
+    implementation ('org.eclipse.parsson:parsson:1.1.1')
+
+
     testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation ('org.junit.jupiter:junit-jupiter')
 }
 
 test {

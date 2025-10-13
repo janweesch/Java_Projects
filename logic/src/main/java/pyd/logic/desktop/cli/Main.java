@@ -3,10 +3,11 @@ package pyd.logic.desktop.cli;
 import pyd.logic.Task.Task;
 import pyd.logic.Lists.ToDoList;
 
+import java.io.IOException;
+
 public class Main
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
          // create new ToDOList
         ToDoList toDoList1 = new ToDoList("Friday");
 
@@ -38,13 +39,16 @@ public class Main
         // Show the result
         toDoList1.getList().stream().forEach(Task -> System.out.println(Task.getTitle()));
 
-        // delete Task
-        toDoList1.deleteList();
+
+        toDoList1.WriteJson();
 
         // Show the result
         //toDoList1.getList().stream().forEach(Task -> System.out.println(Task.getTitle()));
 
-        System.out.println(toDoList1.getTitle());
+
+
+
+
 
 
     }
