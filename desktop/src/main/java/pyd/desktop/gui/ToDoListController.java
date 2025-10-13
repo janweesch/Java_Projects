@@ -173,14 +173,13 @@ public class ToDoListController implements Initializable {
                     super.updateItem(item, empty);
                     if (item == null)
                     {
-                       setStyle("-fx-background-color: white; -fx-text-fill: ");
+                        setStyle("");
                     }
                     else
                     {
                         if (item.getDone().get())
                         {
                             setStyle("-fx-background-color: green; -fx-text-fill: black");
-
                         }
                     }
                 }
