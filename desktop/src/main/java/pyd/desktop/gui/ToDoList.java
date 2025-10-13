@@ -23,16 +23,15 @@ public class ToDoList extends Application
         Scene scene = new Scene(fxmlLoader.load(), 3000, 1000);
 
        ToDoListController controller = fxmlLoader.getController();
-        stage.setOnHiding(event-> {
+       stage.setOnCloseRequest (event-> {
             try
             {
-                controller.shutdown();
+                controller.shutdown(event);
             }
             catch (IOException e)
             {
                 throw new RuntimeException(e);
-            }
-        });
+            } });
 
 
         stage.setScene(scene);

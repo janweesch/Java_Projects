@@ -13,16 +13,18 @@
 
   <TextField fx:id="title" prefHeight="20.0" prefWidth="50.0" promptText="Put your Title..." styleClass="radiusInput" onAction="#setTitle"/>
 
-  <HBox spacing="20.0" alignment="CENTER">
-    <Button text="Add" prefWidth="50" prefHeight="20" onAction="#addTask" />
-    <Button text="Delete" prefWidth="70" prefHeight="20" onAction="#deleteTask"/>
-    <Button text="Load" prefWidth="60" prefHeight="20" onAction="#loadToDoList"/>
-    <Button text="New" prefWidth="50" prefHeight="20" onAction="#newToDoList"/>
-    <Button text="Save" prefWidth="60" prefHeight="20" onAction="#saveToDoList"/>
-
-
-
-
+  <HBox  alignment="CENTER">
+      <HBox HBox.hgrow="ALWAYS">
+      </HBox>
+      <HBox spacing="20.0" alignment="CENTER" HBox.hgrow="ALWAYS">
+          <Button text="Add" prefWidth="50" prefHeight="20" onAction="#addTask" />
+          <Button text="Delete" prefWidth="70" prefHeight="20" onAction="#deleteTask"/>
+      </HBox>
+    <HBox spacing="20.0" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+        <Button text="Load" prefWidth="60" prefHeight="20" onAction="#loadToDoList"/>
+        <Button text="New" prefWidth="50" prefHeight="20" onAction="#newToDoList"/>
+        <Button text="Save" prefWidth="60" prefHeight="20" onAction="#saveToDoList"/>
+    </HBox>
   </HBox>
 
   <TextField fx:id="task" prefHeight="20.0" prefWidth="50.0" promptText="Put your Task here..." styleClass="radiusInput" onAction="#setTask"/>

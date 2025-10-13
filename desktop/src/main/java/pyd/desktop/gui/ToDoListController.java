@@ -2,22 +2,21 @@ package pyd.desktop.gui;
 
 import jakarta.json.*;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import pyd.logic.Lists.ToDoList;
 import pyd.logic.Task.Task;
-
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 public class ToDoListController implements Initializable {
     //@FXML
     public VBox vbox;
@@ -38,7 +36,6 @@ public class ToDoListController implements Initializable {
     private TextField task;
     @FXML
     private ListView<Task> list;
-
 
     // ToDoList
     ToDoList toDoList;
@@ -71,12 +68,13 @@ public class ToDoListController implements Initializable {
 
     public void deleteTask() {
         if (list.getSelectionModel().getSelectedItems().isEmpty()) {
-            Label delete_Label = new Label("Select the Tasks you want to delete!");
-            delete_Label.setAlignment(Pos.CENTER);
-            Scene scene2 = new Scene(delete_Label, 600, 600);
-            Stage stage = new Stage();
-            stage.setScene(scene2);
-            stage.show();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Select the Tasks you want to delete!");
+            alert.showAndWait();
+
         } else {
             ArrayList<Task> tasks_to_delete = new ArrayList<>(list.getSelectionModel().getSelectedItems()); // safe Items as Array List
             for (Task del_task : tasks_to_delete) // iterate and delete
@@ -117,24 +115,57 @@ public class ToDoListController implements Initializable {
     @FXML
     protected void newToDoList()
     {
-
+        title.clear();
+        task.clear();
+        list.getItems().clear();
     }
 
     @FXML
-    public void saveToDoList()
-    {
-
-
+    public void saveToDoList() throws IOException {
+        if (title.getText().isEmpty() && !list.getItems().isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please give your ToDoList a name!");
+            alert.showAndWait();
+        }
+        else if (!title.getText().isEmpty())
+        {
+            toDoList.setTitle(title.getText());
+            this.toDoList.WriteJson();
+        }
     }
 
+    public void saveToDoListOnShutdown(WindowEvent event) throws IOException {
+        if (title.getText().isEmpty() && !list.getItems().isEmpty())
+        {
 
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please give your ToDoList a name!");
+            if (alert.showAndWait().get() == ButtonType.OK);
+            {
+                event.consume();
+            }
+        }
+        else if (!title.getText().isEmpty())
+        {
+            toDoList.setTitle(title.getText());
+            this.toDoList.WriteJson();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         toDoList = new ToDoList();
         list.setItems(toDoList.getList());
+        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         list.setCellFactory(list -> new CheckBoxListCell<Task>( item -> {
-            item.getDone().addListener((obs, oldVal, newVal) -> {list.requestFocus(); Platform.runLater(list::refresh);});
+            item.getDone().addListener((obs, oldVal, newVal) -> {Platform.runLater(list::refresh);});
+            list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             return item.getDone();})
             {
                 public void updateItem(Task item, boolean empty)
@@ -142,27 +173,24 @@ public class ToDoListController implements Initializable {
                     super.updateItem(item, empty);
                     if (item == null)
                     {
-                       setStyle("-fx-background-color: white; -fx-text-fill: black");
+                       setStyle("-fx-background-color: white; -fx-text-fill: ");
                     }
                     else
                     {
                         if (item.getDone().get())
                         {
                             setStyle("-fx-background-color: green; -fx-text-fill: black");
+
                         }
                     }
                 }
             }
         );
-        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
     }
 
-    public void shutdown() throws IOException
+    public void shutdown(WindowEvent event) throws IOException
     {
-        this.toDoList.WriteJson();
+        saveToDoListOnShutdown(event);
     }
-
-
 }
 
