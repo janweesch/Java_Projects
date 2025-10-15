@@ -10,7 +10,6 @@
 - [x] ToDoList: It should be possible to add more than one task at once
 - [x] ToDoList should work with GUI (JavaFx)
   - [X] Swap and Drag and Drop function
-  - [ ] 
 - [ ] Implement Tests for ToDoList and GUI
 - [ ] Expand Task Class with complex (with TimeMethods, Notes and Documents)
 

@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 
 import javafx.stage.WindowEvent;
 import pyd.logic.Lists.ToDoList;
@@ -21,9 +20,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -120,11 +117,12 @@ public class ToDoListController implements Initializable {
     public void saveToDoList() throws IOException {
         if (title.getText().isEmpty() && !list.getItems().isEmpty())
         {
+            // show an Alert message if ToDo List can not be saved
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Please give your ToDoList a name!");
-            alert.showAndWait();
+            alert.showAndWait(); // wait until click Button OK on Window
         }
         else if (!title.getText().isEmpty())
         {
@@ -206,7 +204,7 @@ public class ToDoListController implements Initializable {
                         }
                     });
 
-                    // drop the Drag
+                    // drop the DraggedItem
                     setOnDragDropped(event -> {
                         if (getItem() == null)
                         {
@@ -226,11 +224,13 @@ public class ToDoListController implements Initializable {
 
                             if (draggedTask.getDone().get() != getItem().getDone().get() )
                             {
-                                this.setStyle("");
-                                Platform.runLater(list::refresh);
-                                list.getSelectionModel().clearSelection();
+                                this.setStyle(""); // set default style of ListCell
+                                Platform.runLater(list::refresh); // refresh the ListCell
+                                list.getSelectionModel().clearSelection(); // clear the Selections
 
                             }
+
+                            // swap the two Items
                             items.set(draggedIdx, getItem());
                             items.set(thisIdx, draggedTask);
 
