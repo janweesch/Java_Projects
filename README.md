@@ -9,7 +9,7 @@
 - [x] ToDoList should work in the Terminal  (`add`, `delete`, `swap` )
 - [x] ToDoList: It should be possible to add more than one task at once
 - [x] ToDoList should work with GUI (JavaFx)
-  - [ ] Swap and Drag and Drop function
+  - [X] Swap and Drag and Drop function
   - [ ] 
 - [ ] Implement Tests for ToDoList and GUI
 - [ ] Expand Task Class with complex (with TimeMethods, Notes and Documents)

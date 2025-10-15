@@ -5,16 +5,15 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
+
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 import javafx.stage.WindowEvent;
 import pyd.logic.Lists.ToDoList;
 import pyd.logic.Task.Task;
@@ -45,8 +44,8 @@ public class ToDoListController implements Initializable {
     // Dragged Task
     Task draggedTask;
 
-    // DataFormat
-    DataFormat taskFormat = new DataFormat("javafx/Task"); // create new DataFormat for my Task
+    // JSON Handle
+    ToDoList.SaveAndLoadFiles handle = new ToDoList.SaveAndLoadFiles();
 
     @FXML
     protected void setTitle() {
@@ -97,37 +96,21 @@ public class ToDoListController implements Initializable {
     }
 
     @FXML
-    protected void loadToDoList() throws IOException {
+    protected void loadToDoList() throws IOException
+    {
+        File file = handle.LoadJson(); // choose JSON File from Explorer
 
-        FileChooser fileChooser = new FileChooser(); // open Explorer
-        fileChooser.setTitle("Open ToDO List File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
-        File selectedFile =fileChooser.showOpenDialog(list.getScene().getWindow());
+        ToDoList.SaveAndLoadFiles.TitleAndToDoList result = handle.readFromJson(file, toDoList); // read JSON File to ToDo List
 
-        String content = Files.readString(selectedFile.toPath());
-        JsonReader reader = Json.createReader(new StringReader(content));
-        JsonObject obj = reader.readObject();
-        title.setText(obj.getString("title"));
-        List<String> TaskList =  obj.getJsonArray("Tasks").stream().map(JsonValue::asJsonObject).map(o -> o.getString("task")).toList();
-        List<Boolean> StatusList =  obj.getJsonArray("Tasks").stream().map(JsonValue::asJsonObject).map(o -> o.getBoolean("status")).toList();
+        title.setText(result.title()); // extract Title
 
-        int index = 0;
-
-        for (Object task : TaskList)
-        {
-            Task task1 = new Task(task.toString());
-            task1.setDone(StatusList.get(index));
-            toDoList.add(task1);
-
-            index++;
-        }
-        reader.close();
+        toDoList = result.toDoList(); // set ToDO list
     }
 
     @FXML
     protected void newToDoList()
     {
-        // clear all Inputs to create a new ToDO List
+        // clear all Inputs and Tasks from ToDO List
         title.clear();
         task.clear();
         list.getItems().clear();
@@ -146,7 +129,7 @@ public class ToDoListController implements Initializable {
         else if (!title.getText().isEmpty())
         {
             toDoList.setTitle(title.getText());
-            this.toDoList.WriteJson();
+            handle.writeToJson(toDoList);
         }
     }
 
@@ -165,7 +148,7 @@ public class ToDoListController implements Initializable {
         else if (!title.getText().isEmpty())
         {
             toDoList.setTitle(title.getText());
-            this.toDoList.WriteJson();
+            handle.writeToJson(toDoList);
         }
     }
 

@@ -2,6 +2,7 @@ package pyd.logic.Task;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import pyd.logic.Lists.ListModifier;
 import pyd.logic.UsefulMethods.TimeMethods;
 
 import java.time.LocalDate;
@@ -38,10 +39,13 @@ public class Task
      * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      */
 
+    /**
+     * A {@code Task} class to create different Tasks with additional attributes for the {@code ToDo List} for modifying different tasks.
+     * <p>
+     */
     public Task (String task)
     {
         title = task;
-
     }
 
     public void setTitle(String title)
