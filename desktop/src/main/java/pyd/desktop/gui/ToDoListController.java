@@ -2,6 +2,7 @@ package pyd.desktop.gui;
 
 import jakarta.json.*;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -40,9 +42,17 @@ public class ToDoListController implements Initializable {
     // ToDoList
     ToDoList toDoList;
 
+    // Dragged Task
+    Task draggedTask;
+
+    // DataFormat
+    DataFormat taskFormat = new DataFormat("javafx/Task"); // create new DataFormat for my Task
+
     @FXML
     protected void setTitle() {
+
         toDoList.setTitle(title.getText());
+        task.requestFocus();
     }
 
     @FXML
@@ -75,12 +85,14 @@ public class ToDoListController implements Initializable {
             alert.setContentText("Select the Tasks you want to delete!");
             alert.showAndWait();
 
-        } else {
+        }
+        else {
             ArrayList<Task> tasks_to_delete = new ArrayList<>(list.getSelectionModel().getSelectedItems()); // safe Items as Array List
             for (Task del_task : tasks_to_delete) // iterate and delete
             {
                 toDoList.remove(del_task);
             }
+            list.getSelectionModel().clearSelection(); // clear Selections, so that you can't spam the delet button!
         }
     }
 
@@ -115,6 +127,7 @@ public class ToDoListController implements Initializable {
     @FXML
     protected void newToDoList()
     {
+        // clear all Inputs to create a new ToDO List
         title.clear();
         task.clear();
         list.getItems().clear();
@@ -140,7 +153,6 @@ public class ToDoListController implements Initializable {
     public void saveToDoListOnShutdown(WindowEvent event) throws IOException {
         if (title.getText().isEmpty() && !list.getItems().isEmpty())
         {
-
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -161,30 +173,114 @@ public class ToDoListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         toDoList = new ToDoList();
         list.setItems(toDoList.getList());
-        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); // enable multi selections
 
         list.setCellFactory(list -> new CheckBoxListCell<Task>( item -> {
+
             item.getDone().addListener((obs, oldVal, newVal) -> {Platform.runLater(list::refresh);});
-            list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             return item.getDone();})
             {
+                {
+                    setOnDragDetected(event -> // starts if Drag is detected
+                    { // check if selected Item is null
+                        if (getItem() == null)
+                        {
+                            return;
+                        };
+
+                    ObservableList<Task> items = getListView().getItems();
+
+                    Dragboard dragboard = startDragAndDrop(TransferMode.MOVE); // specific Clipboard
+                    ClipboardContent content = new ClipboardContent();
+
+                    draggedTask = getItem(); // save dragged Task
+
+                    content.putString(getItem().getTitle()); // put String on ClipboardConten
+                    dragboard.setContent(content); // store Data Format
+                    event.consume();
+                    } );
+
+
+                    setOnDragOver(event -> { // continue moving the Node
+                        if (event.getGestureSource() != this && event.getDragboard().hasString())
+                        {
+                            event.acceptTransferModes(TransferMode.MOVE);
+                        }
+                        event.consume();
+                    });
+
+                    setOnDragEntered(event -> { // make the Node transparent,  if dragged Node enters
+                        if (event.getGestureSource() != this && event.getDragboard().hasString())
+                        {
+                            setOpacity(0.3);
+                        }
+                    });
+
+                    setOnDragExited(event -> { // delete transparency, if dragged Node leaves
+                        if (event.getGestureSource() != this && event.getDragboard().hasString())
+                        {
+                            setOpacity(1);
+                        }
+                    });
+
+                    // drop the Drag
+                    setOnDragDropped(event -> {
+                        if (getItem() == null)
+                        {
+                            return;
+                        }
+
+                        Dragboard db = event.getDragboard(); // get the Dragboard
+                        boolean success = false;
+
+                        if (db.hasString())
+                        {
+                            ObservableList<Task> items = getListView().getItems();
+                            List<String> itemsString =items.stream().map(Task::getTitle).toList(); // convert ObservableList<Task> to String
+
+                            int draggedIdx = itemsString.indexOf(db.getString()); // get Index of dragged Object
+                            int thisIdx = items.indexOf(getItem()); // get Index of current selected Item
+
+                            if (draggedTask.getDone().get() != getItem().getDone().get() )
+                            {
+                                this.setStyle("");
+                                Platform.runLater(list::refresh);
+                                list.getSelectionModel().clearSelection();
+
+                            }
+                            items.set(draggedIdx, getItem());
+                            items.set(thisIdx, draggedTask);
+
+                            success = true;
+                        }
+                        event.setDropCompleted(success);
+
+                        event.consume();
+                    });
+                    setStyle("");
+                    setOnDragDone(DragEvent::consume);
+
+                }
+
+
                 public void updateItem(Task item, boolean empty)
                 {
                     super.updateItem(item, empty);
                     if (item == null)
                     {
-                        setStyle("");
+                        setStyle(""); // set Default style
                     }
                     else
                     {
                         if (item.getDone().get())
                         {
-                            setStyle("-fx-background-color: green; -fx-text-fill: black");
+                            setStyle("-fx-background-color: green; -fx-text-fill: black"); // Checked list Cells are Green!
                         }
                     }
                 }
             }
         );
+
     }
 
     public void shutdown(WindowEvent event) throws IOException
