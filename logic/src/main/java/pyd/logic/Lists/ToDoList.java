@@ -14,12 +14,10 @@ import java.util.NoSuchElementException;
 import javafx.collections.FXCollections;
 
 
-
-
 /**
  * A ToDo list for modifying different tasks.
  * <p>
- * Implements the {@link ListModifier} interface with type {@code ToDo.ToDo.Task.Task}.
+ * Implements the {@link ListModifier} interface.
  */
 public class ToDoList implements ListModifier<Task>
 {
@@ -28,11 +26,11 @@ public class ToDoList implements ListModifier<Task>
     private ObservableList<Task> ToDO; // TODo List
 
     /**
-     * Creates a new ToDo.Lists.ToDoList and assigns it a specific Title.
+     * Creates a new ToDo List
      *
-     * @param title Title of the ToDo.Lists.ToDoList.
+     * @param title Title of the pyd.logic.Lists.ToDoList.
      */
-    public ToDoList(String title)
+      public ToDoList(String title)
     {
         setTitle(title);
         this.ToDO = createList();

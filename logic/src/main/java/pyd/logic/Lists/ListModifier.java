@@ -1,8 +1,6 @@
 package pyd.logic.Lists;
 
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
@@ -12,60 +10,64 @@ import java.util.NoSuchElementException;
 public interface ListModifier <T>
 {
     /**
-     * Creates a new List of Type ToDo.ToDo.Task.Task.
+     * Creates a new List.
      *
-     * @return List of Type ToDo.ToDo.Task.Task
+     * @return an {@link javafx.collections.ObservableList} containing elements of type {@code T}
      */
 
     ObservableList<T> createList(); // create List
 
     /**
-     * Sets the Title of the ToDo.Lists.ToDoList.
-     * @param title The Title of the ToDo.Lists.ToDoList
+     * Sets the Title of the {@code ToDo List}.
+     *
+     * @param title The Title of the {@code ToDo List}.
      */
     void setTitle(String title); // set List Title
 
     /**
-     * Gets the Title of the ToDo.Lists.ToDoList.
+     * Gets the Title of the {@code ToDo List}.
      *
-     * @return Title of the ToDo.Lists.ToDoList
+     * @return Title of the {@code ToDo List}.
      */
     String getTitle();
 
     /**
-     * Gets the ToDo.Lists.ToDoList.
+     * Gets the {@code ToDo List}.
      *
-     * @throws NullPointerException if ToDo.Lists.ToDoList is not available
-     * @return Returns the ToDo.Lists.ToDoList.
+     * @throws NullPointerException if {@code ToDo List} is not available
+     * @return Returns the {@code ToDo List}.
      */
 
     ObservableList<T> getList() throws NullPointerException; // get List
 
     /**
-     * Adds a ToDo.ToDo.Task.Task to the ToDo.Lists.ToDoList.
-     * @param task ToDo.ToDo.Task.Task to add to the ToDo.Lists.ToDoList.
+     * Adds a {@code Task} to the {@code ToDo List}.
+     *
+     * @param task{@code Task} to add to the {@code ToDo List}.
      */
-    void add (T... task); // add ToDo.ToDo.Task.Task
+    void add (T... task); // add Task
 
     /**
-     * Removes a ToDo.ToDo.Task.Task from ToDo.Lists.ToDoList.
-     * @param task ToDo.ToDo.Task.Task to remove from ToDo.Lists.ToDoList.
-     * @throws NoSuchElementException if the task is not in ToDo.Lists.ToDoList
+     * Removes a {@code Task} from {@code ToDo List}.
+     *
+     * @param task {@code Task} to remove from {@code ToDo List}.
+     * @throws NoSuchElementException if the task is not in {@code ToDo List}
      */
-    void remove (T task) throws NoSuchElementException; // remove ToDo.ToDo.Task.Task
+    void remove (T task) throws NoSuchElementException; // remove Task
 
     /**
      * Swaps two Tasks (could be of importance).
-     * @param task1 One ToDo.ToDo.Task.Task to swap
-     * @param task2 Second ToDo.ToDo.Task.Task to swap with first ToDo.ToDo.Task.Task
+     *
+     * @param task1 One {@code Task} to swap
+     * @param task2 Second {@code Task} to swap with first {@code Task}.
      * @throws NullPointerException if one of the tasks is null
-     * @throws NoSuchElementException if one of the tasks is not in ToDo.Lists.ToDoList
+     * @throws NoSuchElementException if one of the tasks is not in {@code ToDo List}
      */
     void swap (T task1, T task2) throws NullPointerException, NoSuchElementException; // swap to Tasks
 
     /**
-     * Deletes first all Tasks from the List, then the ToDo.Lists.ToDoList.
-     * @throws NullPointerException if ToDo.Lists.ToDoList is not available
+     * Deletes first all Tasks from the List, then the {@code ToDo List}.
+     * @throws NullPointerException if {@code ToDo List} is not available
      */
     void deleteList() throws NullPointerException; // delete List
 }
