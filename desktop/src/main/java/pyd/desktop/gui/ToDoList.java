@@ -13,7 +13,7 @@ public class ToDoList extends Application
     public void start(Stage stage) throws IOException
     {
         FXMLLoader fxmlLoader = new FXMLLoader(ToDoList.class.getResource("ToDoListLayout.fxml"));
-        stage.setTitle("Plan Your Day!"); // window name
+        stage.setTitle("ToDo List!"); // window name
 
         Scene scene = new Scene(fxmlLoader.load(), 3000, 1000);
 
