@@ -170,15 +170,22 @@ public class ToDoList implements ListModifier<Task> {
 
         public record TitleAndToDoList(String title, ToDoList toDoList) {}
 
+        File file;
+
+        public File getFile()
+        {
+            return file;
+        }
+
         /**
          * Writes {@code ToDo List} in a JSON File.
          *
          * @param toDoList with {@code Task} defined in a  {@code ListView} for example.
-         * @throws IOException if it is not possible to write the JSON File
+         * @throws IOException if it is not possible to write the JSON File.
          */
         public void writeToJson(ToDoList toDoList) throws IOException {
 
-            FileWriter fileWriter = new FileWriter(toDoList.getTitle() + ".json"); // create FileWriter and specify file name
+            FileWriter fileWriter = new FileWriter(file); // create FileWriter and specify file name
 
             // activate PRETTY PRINTING
             Map<String, Boolean> properties = new HashMap<>(1);
@@ -194,7 +201,6 @@ public class ToDoList implements ListModifier<Task> {
                 JsonObject jsonObject1 = Json.createObjectBuilder().add("task", task.getTitle()).add("status", task.getDone().get()).build(); // add tasks
                 jsonArrayBuilder.add(jsonObject1);
             }
-
             // write to JSON File
             jsonObjectBUilder.add("Tasks", jsonArrayBuilder);
             jsonObjectWriter.writeObject(jsonObjectBUilder.build());
@@ -203,7 +209,7 @@ public class ToDoList implements ListModifier<Task> {
 
 
         /**
-         * Opens the Explorer to select a JSON File.
+         * Open the Explorer to select a JSON File.
          *
          * @return the JSON File
          */
@@ -211,11 +217,30 @@ public class ToDoList implements ListModifier<Task> {
         {
             FileChooser fileChooser = new FileChooser(); // open Explorer
             fileChooser.setTitle("Select ToDO List File");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
-            return fileChooser.showOpenDialog(Window.getWindows().getFirst());
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Datei", "*.json"));
+            return file = fileChooser.showOpenDialog(Window.getWindows().getFirst());
         }
 
-        public TitleAndToDoList readFromJson(File file, ToDoList toDoList) throws IOException
+        /**
+         * Select a Directory where to save the Json File.
+         *
+         * @return The file selected by the user for saving data.
+         */
+        public File selectSavingDirectory()
+        {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+            return file = fileChooser.showSaveDialog(Window.getWindows().getFirst());
+        }
+
+        /**
+         * Read a selected JSON File from the Explorer.
+         *
+         * @param toDoList to save the read Data
+         * @return {@code ToDoList Title } and {@code Tasks} from JSON File
+         * @throws IOException if JSON File could not be read
+         */
+        public TitleAndToDoList readFromJson(ToDoList toDoList) throws IOException
         {
             String content = Files.readString(file.toPath());
             JsonReader reader = Json.createReader(new StringReader(content));

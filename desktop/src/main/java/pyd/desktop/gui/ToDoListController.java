@@ -87,6 +87,7 @@ public class ToDoListController implements Initializable {
             for (Task del_task : tasks_to_delete) // iterate and delete
             {
                 toDoList.remove(del_task);
+                Platform.runLater(list::refresh);
             }
             list.getSelectionModel().clearSelection(); // clear Selections, so that you can't spam the delet button!
         }
@@ -97,7 +98,7 @@ public class ToDoListController implements Initializable {
     {
         File file = handle.LoadJson(); // choose JSON File from Explorer
 
-        ToDoList.SaveAndLoadFiles.TitleAndToDoList result = handle.readFromJson(file, toDoList); // read JSON File to ToDo List
+        ToDoList.SaveAndLoadFiles.TitleAndToDoList result = handle.readFromJson(toDoList); // read JSON File to ToDo List
 
         title.setText(result.title()); // extract Title
 
@@ -127,6 +128,7 @@ public class ToDoListController implements Initializable {
         else if (!title.getText().isEmpty())
         {
             toDoList.setTitle(title.getText());
+            File file = handle.selectSavingDirectory();
             handle.writeToJson(toDoList);
         }
     }
@@ -146,7 +148,27 @@ public class ToDoListController implements Initializable {
         else if (!title.getText().isEmpty())
         {
             toDoList.setTitle(title.getText());
-            handle.writeToJson(toDoList);
+
+            if (handle.getFile() != null)
+            {
+                handle.writeToJson(toDoList);
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Close without to save");
+                alert.setHeaderText(null);
+                alert.setContentText("Do you really want to close the ToDo List without saving ?");
+                if (alert.showAndWait().get() == ButtonType.CANCEL)
+                {
+                    event.consume();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
         }
     }
 
@@ -242,7 +264,6 @@ public class ToDoListController implements Initializable {
                     });
                     setStyle("");
                     setOnDragDone(DragEvent::consume);
-
                 }
 
 
